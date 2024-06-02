@@ -2,7 +2,7 @@ package com.apirest.apirest.Controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apirest.apirest.Repositories.ProductoRepository;
+import com.apirest.apirest.Repositories.ProductRepository;
 
 import jakarta.websocket.server.PathParam;
 
@@ -16,51 +16,51 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.apirest.apirest.Entities.Producto;
+import com.apirest.apirest.Entities.Product;
 
 
 @RestController
-@RequestMapping("/productos")
+@RequestMapping("/products")
 
-public class ProductoController {
+public class ProductController {
 
     @Autowired
-    private ProductoRepository productoRepository;
+    private ProductRepository productRepository;
 
     @GetMapping
-    public List<Producto> getAllProductos(){
-        return productoRepository.findAll();
+    public List<Product> getAllProducts(){
+        return productRepository.findAll();
     }
 
     @PostMapping
-    public Producto createProducto(@RequestBody Producto producto){
-        return productoRepository.save(producto);
+    public Product createProduct(@RequestBody Product product){
+        return productRepository.save(product);
     }
 
     @GetMapping("/{id}")
-    public Producto obtenerProductoPorId(@PathVariable Long id){
-        return productoRepository.findById(id)
+    public Product getProductById(@PathVariable Long id){
+        return productRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("No se encontró el producto con el ID: " + id));
     }
 
     @PutMapping("/{id}")
-    public Producto updateProducto(@PathVariable Long id, @RequestBody Producto detallesProducto){
-        Producto producto =  productoRepository.findById(id)
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product detailsProduct){
+        Product product =  productRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("No se encontró el producto con el ID: " + id));
         
-        producto.setNombre(detallesProducto.getNombre());
-        producto.setPrecio(detallesProducto.getPrecio());
+        product.setName(detailsProduct.getName());
+        product.setPrice(detailsProduct.getPrice());
 
-        return productoRepository.save(producto);
+        return productRepository.save(product);
 
     }
 
     @DeleteMapping("/{id}")
-    public String borrarProducto(@PathVariable Long id){
-        Producto producto =  productoRepository.findById(id)
+    public String deleteProduct(@PathVariable Long id){
+        Product product =  productRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("No se encontró el producto con el ID: " + id));
         
-        productoRepository.delete(producto);
+        productRepository.delete(product);
         return "El producto con el ID: " + id + " Fue eliminado correctamente";
     }
 }

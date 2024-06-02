@@ -7,13 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Producto {
+public class Product {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY) //Genera Id autoincrement
     private Long id;
-    private String nombre;
-    private double precio;
+    private String name;
+    private double price;
 
 
     public Long getId() {
@@ -22,17 +22,17 @@ public class Producto {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
-    public double getPrecio() {
-        return precio;
+    public double getPrice() {
+        return price;
     }
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     
